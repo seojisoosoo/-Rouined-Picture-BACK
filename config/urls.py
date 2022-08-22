@@ -25,5 +25,4 @@ urlpatterns = [
     path('<int:id>/update', update, name="update"),
     path('<int:id>/delete', delete, name="delete"),
     path('<int:id>/like', like, name="like"),
-]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
