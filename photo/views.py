@@ -10,23 +10,23 @@ import json
 
 def home(request):
     if request.method == 'GET':
-        Photos = Photo.objects.all()
-        Photo_list = []
-        for Photo in Photos:
-            Photo_list.append({
-                'id': Photo.id,
-                'img':Photo.img,
-                'title': Photo.title,
-                'writer': Photo.writer,
-                'body': Photo.body, })
+        photos = Photo.objects.all()
+        photo_list = []
+        for photo in photos:
+            photo_list.append({
+                'id': photo.id,
+                'img':photo.img,
+                'title': photo.title,
+                'writer': photo.writer,
+                'body': photo.body, })
 
         return JsonResponse({
-            'data': Photo_list
+            'data': photo_list
         })
     elif request.method == 'POST':
         body = json.loads(request.body.decode('utf-8'))
 
-        Photo = Photo.objects.create(
+        photo = Photo.objects.create(
             img=body['img'],
             title=body['title'],
             writer=body['writer'],
@@ -35,18 +35,18 @@ def home(request):
         )
         return JsonResponse({
             'ok': True,
-            'data': {'img':Photo.img,
-                    'title': Photo.title,
-                     'writer': Photo.writer,
-                     'body': Photo.body, }
+            'data': {'img':photo.img,
+                    'title': photo.title,
+                     'writer': photo.writer,
+                     'body': photo.body, }
         })
 def update(request, id):
     if request.method == 'PUT':
         body = json.loads(request.body.decode('utf-8'))
 
         update = get_object_or_404(Photo, pk=id)
-        # update = get_object_or_404(Photo, pk=index)
-        # update = Photo.objects.get(id=id)
+        # update = get_object_or_404(photo, pk=index)
+        # update = photo.objects.get(id=id)
         # update.id = body['id']
         update.img=body['img']
         update.title = body['title']
@@ -66,7 +66,7 @@ def update(request, id):
 def delete(request, id):
     if request.method == 'DELETE':
         delete = get_object_or_404(Photo, pk=id)
-        # delete = Photo.objects.get(id=id-1)
+        # delete = photo.objects.get(id=id-1)
 
         delete.delete()
         return JsonResponse({
