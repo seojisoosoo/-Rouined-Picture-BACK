@@ -74,13 +74,14 @@ def delete(request, id):
             'data': None
         })
 
-def like(id):
-    like_b = get_object_or_404(Photo, id=id)
-    like_b.like_count += 1
-    like_b.save()
-    return JsonResponse({
-        'ok':True,
-        'data':{
-            'like':like_b
-        }
-    })
+def like(request,id):
+    if request.method == 'POST':
+        like_b = get_object_or_404(Photo, id=id)
+        like_b.like_count += 1
+        like_b.save()
+        return JsonResponse({
+            'ok':True,
+            'data':{
+                'like':like_b
+            }
+        })
