@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from photo.views import *
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('',home, name="home"),
+    path('<int:id>/update', update, name="update"),
+    path('<int:id>/delete', delete, name="delete"),
+    path('<int:id>/like', like, name="like"),
+
 ]
+
+

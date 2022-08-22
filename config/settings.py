@@ -136,8 +136,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
-
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+CORS_ORIGIN_WHITELIST = [
+    # 허용할 프론트엔드 도메인 추가 EX:
+    'http://localhost:3000',
+    'https://localhost:3000',
+    'http://127.0.0.1:8000',
+    'https://rouined-photo-exhibition.netlify.app/',
+]
