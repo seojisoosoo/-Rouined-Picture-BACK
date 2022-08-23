@@ -20,7 +20,8 @@ def home(request):
                 'title': photo.title,
                 'writer': photo.writer,
                 'body': photo.body,
-                'password':photo.password })
+                'password':photo.password
+                 })
 
         return JsonResponse({
             'data': photo_list
@@ -49,33 +50,40 @@ def home(request):
                         'title': photo.title,
                         'writer': photo.writer,
                         'body': photo.body,
-                        'password': photo.password,
+                        'password': photo.password
                      }
         })
 
 
 def update(request, id):
-    if request.method == 'PUT':
-        body = json.loads(request.body.decode('utf-8'))
-
+    if request.method == 'POST':
+        # body = json.loads(request.body.decode('utf-8'))
+        body = request.POST
+        file = request.FILES
+        print(body,file)
         update = get_object_or_404(Photo, pk=id)
         # update = get_object_or_404(photo, pk=index)
         # update = photo.objects.get(id=id)
         # update.id = body['id']
-        update.img=body['img']
+        # update.img=body['imgFile']
         update.title = body['title']
         update.writer = body['writer']
         update.body = body['body']
+        update.password = body['password']
         update.pub_date = timezone.now()
+        # update.save()
+        if(request.FILES): update.img = file['imgFile']
         update.save()
+
         return JsonResponse({
             'ok': True,
             'data': {
                 # 'id': update.id,
-                'img':update.img,
+                'img':BASE_URL+"/media/"+str(update.img),
                 'title': update.title,
                 'writer': update.writer,
-                'body': update.body, }
+                'body': update.body, 
+                'password': update.password}
         })
 def delete(request, id):
     if request.method == 'DELETE':
@@ -88,14 +96,30 @@ def delete(request, id):
             'data': None
         })
 
+# def like(request,id):
+#     if request.method == 'GET':
+#         like_b = get_object_or_404(Photo, id=id)
+#         like_b.like_count += 1
+#         like_b.save()
+#         return JsonResponse({
+#             'ok':True,
+#             'data':{
+#                 'like':like_b
+#             }
+#         })
+
 def like(request,id):
-    if request.method == 'POST':
-        like_b = get_object_or_404(Photo, id=id)
-        like_b.like_count += 1
-        like_b.save()
+    if request.method=='GET':
+        photos= Photo.objects.all()
+        likes_list = {}
+        for photo in photos:
+            # likes_list.append({
+            #     'like_count': photo.like_count+1
+            #      })
+            likes_list[photo.id]=photo.like_count+1
+
         return JsonResponse({
             'ok':True,
-            'data':{
-                'like':like_b
-            }
+            'data': likes_list
         })
+        
