@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.http import JsonResponse
 import json
 
+BASE_URL = "http://127.0.0.1:8000"
 
 def home(request):
     if request.method == 'GET':
@@ -15,31 +16,44 @@ def home(request):
         for photo in photos:
             photo_list.append({
                 'id': photo.id,
-                'img':photo.img,
+                'img':BASE_URL+"/media/"+str(photo.img),
                 'title': photo.title,
                 'writer': photo.writer,
-                'body': photo.body, })
+                'body': photo.body,
+                'password':photo.password })
 
         return JsonResponse({
             'data': photo_list
         })
     elif request.method == 'POST':
-        body = json.loads(request.body.decode('utf-8'))
+        # body = json.loads(request.body.decode('utf-8'))
+        body = request.POST
+        file = request.FILES
+        print(body, file)
 
         photo = Photo.objects.create(
-            img=body['img'],
             title=body['title'],
             writer=body['writer'],
             body=body['body'],
+            password=body['password'],
             pub_date=timezone.now()
         )
+
+        if(file['imgFile']): photo.img = file['imgFile']
+        photo.save()
+
         return JsonResponse({
             'ok': True,
-            'data': {'img':photo.img,
-                    'title': photo.title,
-                     'writer': photo.writer,
-                     'body': photo.body, }
+            'data': {
+                        'img': BASE_URL+"/media/"+str(photo.img),
+                        'title': photo.title,
+                        'writer': photo.writer,
+                        'body': photo.body,
+                        'password': photo.password,
+                     }
         })
+
+
 def update(request, id):
     if request.method == 'PUT':
         body = json.loads(request.body.decode('utf-8'))

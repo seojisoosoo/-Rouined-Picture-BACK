@@ -1,8 +1,9 @@
 from django.db import models
+BASE_URL = "http://127.0.0.1:8000"
 
 # Create your models here.
 class Photo(models.Model):
-    img=models.ImageField(upload_to="",blank=True, null=True)
+    img=models.ImageField(upload_to="",blank=True, null=True, default="noImg.png")
     title = models.CharField(max_length=200)
     # 최대길이가 200자라는 말
     writer=models.CharField(max_length=100)
