@@ -1,5 +1,5 @@
+from xml.etree.ElementTree import Comment
 from django.db import models
-BASE_URL = "http://127.0.0.1:8000"
 
 # Create your models here.
 class Photo(models.Model):
@@ -17,3 +17,8 @@ class Photo(models.Model):
 
     # def summary(self):
     #     return self.body[:50]
+
+class Visitor(models.Model):
+    star=models.CharField(max_length=10)
+    visitor=models.CharField(max_length=50)
+    comment=models.TextField()
