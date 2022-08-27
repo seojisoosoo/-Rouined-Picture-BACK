@@ -2,7 +2,8 @@
 # Create your views here.
 from operator import index
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Photo
+from .models import Photo,Visitor
+
 from django.utils import timezone
 from django.http import JsonResponse
 import json
@@ -129,3 +130,34 @@ def like(request,id):
 #             'data': likes_list
 #         })
 
+def visitor(request):
+    if request.method == 'GET':
+        visitors = Visitor.objects.all()
+        visitor_list = []
+        for visitor in visitors:
+            visitor_list.append({
+                'id': visitor.id,
+                'visitor':visitor.visitor,
+                'year':visitor.date.year,
+                'month':visitor.date.month,
+                'day':visitor.date.day
+                 })
+
+        return JsonResponse({
+            'data': visitor_list
+        })
+    elif request.method == 'POST':
+        
+        body = json.loads(request.body.decode('utf-8'))
+        
+        visitor= Visitor.objects.create(
+            visitor=body['visitor']
+        )
+       
+        return JsonResponse({
+            'ok': True,
+            'data': {
+                'id':visitor.id,
+                        'visitor':visitor.visitor
+                     }
+        })

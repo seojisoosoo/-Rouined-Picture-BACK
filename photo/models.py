@@ -1,6 +1,6 @@
 from xml.etree.ElementTree import Comment
 from django.db import models
-
+import datetime
 # Create your models here.
 class Photo(models.Model):
     img=models.ImageField(upload_to="",blank=True, null=True, default="noImg.png")
@@ -19,6 +19,7 @@ class Photo(models.Model):
     #     return self.body[:50]
 
 class Visitor(models.Model):
-    star=models.CharField(max_length=10)
+    # star=models.CharField(max_length=10)
     visitor=models.CharField(max_length=50)
-    comment=models.TextField()
+    date=datetime.date.today()
+    # comment=models.TextField()
