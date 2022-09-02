@@ -115,20 +115,6 @@ def like(request,id):
             }
         })
 
-# def like(request,id):
-#     if request.method=='POST':
-#         photos= Photo.objects.all()
-#         likes_list = {}
-#         for photo in photos:
-#             # likes_list.append({
-#             #     'like_count': photo.like_count+1
-#             #      })
-#             likes_list[photo.id]=photo.like_count+1
-
-#         return JsonResponse({
-#             'ok':True,
-#             'data': likes_list
-#         })
 
 def visitor(request):
     if request.method == 'GET':
