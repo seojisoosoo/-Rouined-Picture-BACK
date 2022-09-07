@@ -162,7 +162,7 @@ CORS_ORIGIN_WHITELIST = [
     "https://rouined-photo-exhibition.netlify.app"
 ]
 django_heroku.settings(locals())
-
+SITE_ID=1
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
