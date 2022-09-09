@@ -9,7 +9,7 @@ from django.http import JsonResponse
 import json
 
 # BASE_URL = "http://127.0.0.1:8000"
-BASE_URL='https://rouined-photo-exhibition.herokuapp.com/'
+BASE_URL='https://rouined-photo-exhibition.herokuapp.com'
 
 def home(request):
     if request.method == 'GET':
