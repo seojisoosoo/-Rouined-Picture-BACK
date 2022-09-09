@@ -1,7 +1,6 @@
 # 망한 사진 전시회 - 백엔드 🌷
-- [ ] 초기 세팅
-- [ ] API 명세 작성
-- [ ] Create
-- [ ] Read
-- [ ] Update
-- [ ] Delete
+- [X] 초기 세팅
+- [X] API 명세 작성
+- [X] API 구현
+
+https://rouined-photo-exhibition.herokuapp.com/
