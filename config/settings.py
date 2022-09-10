@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os, json
+from pickle import FALSE, TRUE
 from django.core.exceptions import ImproperlyConfigured
 import django_heroku
 
@@ -54,7 +55,10 @@ else:
 # DEBUG = False
 
 # ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
-DEBUG = (os.environ.get('DEBUG', 'True') != 'False')
+# DEBUG = (os.environ.get('DEBUG', 'True') != 'False')
+# DEBUG=FALSE
+DEBUG=TRUE
+
 ALLOWED_HOSTS = ['*'] 
 
 # Application definition
