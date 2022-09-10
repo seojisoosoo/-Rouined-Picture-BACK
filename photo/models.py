@@ -3,7 +3,7 @@ from django.db import models
 import datetime
 # Create your models here.
 class Photo(models.Model):
-    img=models.ImageField(upload_to="media/",blank=True, null=True, default="noImg.png")
+    img=models.ImageField(upload_to="images/",blank=True, null=True, default="noImg.png")
     title = models.CharField(max_length=200)
     # 최대길이가 200자라는 말
     writer=models.CharField(max_length=100)
