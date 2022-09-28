@@ -18,8 +18,7 @@ def home(request):
         for photo in photos:
             photo_list.append({
                 'id': photo.id,
-                # 'img':BASE_URL+"/media/"+str(photo.img),
-                'img':BASE_URL+"/"+str(photo.img),
+                'img':BASE_URL+"/media/"+str(photo.img),
                 'title': photo.title,
                 'writer': photo.writer,
                 'body': photo.body,
@@ -50,8 +49,7 @@ def home(request):
         return JsonResponse({
             'ok': True,
             'data': {
-                        # 'img': BASE_URL+"/media/"+str(photo.img),
-                        'img':BASE_URL+"/"+str(photo.img),
+                        'img': BASE_URL+"/media/"+str(photo.img),
                         'title': photo.title,
                         'writer': photo.writer,
                         'body': photo.body,
@@ -84,8 +82,7 @@ def update(request, id):
             'ok': True,
             'data': {
                 # 'id': update.id,
-                # 'img':BASE_URL+"/media/"+str(update.img),
-                'img':BASE_URL+"/"+str(update.img),
+                'img':BASE_URL+"/media/"+str(update.img),
                 'title': update.title,
                 'writer': update.writer,
                 'body': update.body, 
