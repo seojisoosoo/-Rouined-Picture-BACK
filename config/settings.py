@@ -158,14 +158,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ORIGIN_ALLOW_ALL=True
-CORS_ORIGIN_WHITELIST = [
-    # 허용할 프론트엔드 도메인 추가 EX:
-    'http://localhost:3000',
-    'https://localhost:3000',
-    'http://127.0.0.1:8000',
-    "https://rouined-photo-exhibition.netlify.app/",
-    "https://rouined-photo-exhibition.herokuapp.com/"
-]
+# CORS_ORIGIN_WHITELIST = [
+#     # 허용할 프론트엔드 도메인 추가 EX:
+#     'http://localhost:3000',
+#     'https://localhost:3000',
+#     # 'http://127.0.0.1:8000',
+#     "https://rouined-photo-exhibition.netlify.app/",
+#     # "https://rouined-photo-exhibition.herokuapp.com/"
+# ]
 django_heroku.settings(locals())
 SITE_ID=1
 import dj_database_url
